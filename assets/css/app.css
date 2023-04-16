@@ -46,11 +46,14 @@ h2 {
         display: none;
     }
 }
-
+.msgLoad img:first-child {
+    width: 160px;
+    margin: 50px auto 0;
+}
 .msgLoad {
     position: fixed;
     background: #FFF212;
-    color: white;
+    color: #E5040E;
     display: none;
     z-index: 999;
     height: 100%;

@@ -10,7 +10,7 @@ var swiper = new Swiper(".mySwiper", {
     },
   });
   var swiper = new Swiper(".mySwiperTabs", {
-          slidesPerView: 3,
+          slidesPerView: 2,
           cssMode: true,
            autoplay: {
           delay: 5500,

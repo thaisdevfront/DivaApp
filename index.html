@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <!-- <meta name="theme-color" content="#FB6E3B"> -->
-    <title>Canoas Ubatuba - Cardápio Digital</title>
-    <link rel="shortcut icon" href="favico.png" type="image/png">
+    <title>Divas - Cardápio Digital</title>
+    <!-- <link rel="shortcut icon" href="favico.png" type="image/png"> -->
     <link rel="stylesheet" href="assets/css/app.css">  
     <link rel="stylesheet" href="assets/css/validation.css">  
     <link rel="stylesheet" href="assets/css/inputs.css">  
@@ -121,6 +121,7 @@
   </form>
   <!-- Mensagem Enviando -->
     <div id="msgLoad" class="msgLoad">
+      <img src="assets/images/logo.png">
       <h3>Aguarde </h3>
       <p>Estamos enviando seu pedido</p>
       <img src="assets/images/loading.gif">
@@ -231,14 +232,12 @@
  <script type="module">
  
  const firebaseConfig = {
-  apiKey: "AIzaSyAyxC6S9lIs2q6MXPJzB4rpjod3HbRXJgU",
-  authDomain: "harmonyfoodapp.firebaseapp.com",
-  databaseURL: "https://harmonyfoodapp-default-rtdb.firebaseio.com",
-  projectId: "harmonyfoodapp",
-  storageBucket: "harmonyfoodapp.appspot.com",
-  messagingSenderId: "910886750410",
-  appId: "1:910886750410:web:810fa41051ae6d12684c33",
-  measurementId: "G-9HD4J8Z2XP"
+    apiKey: "AIzaSyDY6JXe0kBoMU2BlrkafuTm6gq1H5LUohY",
+    authDomain: "harmonydigi-24166.firebaseapp.com",
+    projectId: "harmonydigi-24166",
+    storageBucket: "harmonydigi-24166.appspot.com",
+    messagingSenderId: "970946599618",
+    appId: "1:970946599618:web:e13bd162b24dc46718795b"
  }; 
 
  // Initialize Firebase
@@ -290,7 +289,7 @@
               
               allordersBuy.map((atualOrderMap)=>{
                 recebePedidos.push(atualOrderMap)
-                console.log(atualOrderMap.idPedido) //id pedido Atual
+                 //console.log(atualOrderMap.idPedido)id pedido Atual
                 pedidoAtual.push(atualOrderMap.idPedido) 
 
               })     
@@ -299,6 +298,8 @@
                 mesa:intMesaValue,
                 orders:recebePedidos  //<==================Pedidos Recebidos
               })
+
+          
 
               db.collection('notificacoes').doc(horaReplace).set({  
                 mesa:intMesaValue,
@@ -346,12 +347,23 @@
 
                 if(entregaPed==true){
                   alert('O restaurante recebeu seu pedido, aguarde!')
-                  setTimeout(function(){ 
-                    location.reload()
-
+                  setTimeout(function(){  
+                   var url = "https://wa.me/5512981021517?text=" // Seu numero
+                            + "*Novo pedido pelo APP <3*" + "%0a" // Mensagem personalizada
+                            + "%0a" // Quebra de linha
+                            + "*nº mesa*: " +intMesaValue + "%0a" // Dados do formulário
+                            + "*Nome*: " + userNameString + "%0a"
+                           
+                     window.location.href=url;
+                     console.log({  
+                mesa:intMesaValue,
+                orders:recebePedidos  //<==================Pedidos Recebidos
+              })
                   }, 2000);
                   form.reset() 
-                  
+
+
+                     
 
                 }else{
                   alert('Enviando novamente')
@@ -441,8 +453,14 @@
                               if(atuaIdOrder.idPedido===mapOrdersDelivery.idPedido){
                                 alert('Seu pedido foi entregue ao restaurante')
                                 setTimeout(function(){ 
-                                  location.reload()
-
+                                  // location.reload()
+                                  // var url = "https://wa.me/5512981021517?text=" // Seu numero
+                                  // window.location.href=url;
+                                  consol.log({  
+                                                    "name":userNameString,
+                                                    "whatsapp":inpuMWhats,
+                                                    orders:recebePedidos  //<==================Pedidos Recebidos
+                                              })
                                 }, 2000);
                               }
 
@@ -490,7 +508,7 @@
                       if(atuaIdOrder.idPedido===mapOrdersDelivery.idPedido){
                         alert('Seu pedido foi entregue ao restaurante')
                         setTimeout(function(){ 
-                          location.reload()
+                          // location.reload()
 
                         }, 2000);
                       }
@@ -517,7 +535,7 @@
         }); 
 
         localStorage.setItem("cardapio",JSON.stringify(cardapiobd))
-
+         console.log(cardapiobd)
     }, (error) => {
             console.log('Erro Notificações')
 
