@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <!-- <meta name="theme-color" content="#FB6E3B"> -->
-    <title>Divas - Cardápio Digital</title>
+    <title>Diva Lanches - Cardápio Digital</title>
     <!-- <link rel="shortcut icon" href="favico.png" type="image/png"> -->
     <link rel="stylesheet" href="assets/css/app.css">  
     <link rel="stylesheet" href="assets/css/validation.css">  
@@ -87,7 +87,7 @@
           </label>
           <select onchange="formaRetirada()" id="selectCheckout">
             <option value="1">Selecione a forma de retirada</option>
-            <option value="balcao">Viagem</option>
+            <option value="balcao">Delivery</option>
             <option value="mesa">Mesa</option>
           </select>
         </div>
@@ -103,7 +103,7 @@
             <label style="height:48px;">  
             <img src="assets/images/inputs/whats.png" style="margin-top: 16px;">  
             </label>
-            <input id="inputMesa"  type="number" placeholder="Whatsapp para notificação">
+            <input id="inputMesa"  type="text" placeholder="Digite o Endereço de entrega...">
           </div>
         </div>
       </div>
@@ -294,6 +294,8 @@
 
               })     
               
+
+              //<==================Pedidos Mesas
               db.collection('mesasOpen').doc(intMesaValue).set({  
                 mesa:intMesaValue,
                 orders:recebePedidos  //<==================Pedidos Recebidos
@@ -348,17 +350,28 @@
                 if(entregaPed==true){
                   alert('O restaurante recebeu seu pedido, aguarde!')
                   setTimeout(function(){  
-                   var url = "https://wa.me/5512981021517?text=" // Seu numero
-                            + "*Novo pedido pelo APP <3*" + "%0a" // Mensagem personalizada
+                     
+                   var url = "https://wa.me/5512997794949?text=" // Seu numero
+                            + "*Olá Diva Lanches, novo pedido pelo APP <3*" + "%0a" // Mensagem personalizada
                             + "%0a" // Quebra de linha
+                            + "*Tipo*: Mesa" + "%0a" // Dados do formulário
                             + "*nº mesa*: " +intMesaValue + "%0a" // Dados do formulário
-                            + "*Nome*: " + userNameString + "%0a"
+                            + "*Nome*: " + inputUserName + "%0a"
+                            + "%0a" // Quebra de linha
+                            + "*Pedido itens:*" + "%0a" // Mensagem personalizada
+                             //<==================Pedidos Recebidos
+                            allordersBuy.map((currentOrderMap)=>{
+                                  currentOrderMap.itens.map((currentItensMap)=>{
+                                    url+=""+currentItensMap.quantidade+"un." +currentItensMap.name + "%0a" // Mensagem personalizada
+                                    console.log(totalCart)
+                                  })
+                            })
+                            url+="%0a" + 
+                            " *Total da Compra*: " + "%0a"
+                             + totalCart.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + "%0a" // Mensagem personalizada
                            
-                     window.location.href=url;
-                     console.log({  
-                mesa:intMesaValue,
-                orders:recebePedidos  //<==================Pedidos Recebidos
-              })
+                            window.location.href=url;
+
                   }, 2000);
                   form.reset() 
 
@@ -454,13 +467,31 @@
                                 alert('Seu pedido foi entregue ao restaurante')
                                 setTimeout(function(){ 
                                   // location.reload()
-                                  // var url = "https://wa.me/5512981021517?text=" // Seu numero
-                                  // window.location.href=url;
-                                  consol.log({  
-                                                    "name":userNameString,
-                                                    "whatsapp":inpuMWhats,
-                                                    orders:recebePedidos  //<==================Pedidos Recebidos
-                                              })
+                                  var url = "https://wa.me/5512997794949?text=" // Seu numero
+                                    + "*Olá Diva Lanches, novo pedido pelo APP <3*" + "%0a" // Mensagem personalizada
+                                    + "%0a" // Quebra de linha
+                                    + "*Tipo*: Delivery" + "%0a" // Dados do formulário
+                                    + "*Endereço*: " +inpuMWhats + "%0a" // Dados do formulário
+                                    + "*Nome*: " + inputUserName + "%0a"
+
+                                    + "%0a" // Quebra de linha
+                                    + "*Pedido itens:*" + "%0a" // Mensagem personalizada
+                                    //<==================Pedidos Recebidos
+                                    allordersBuy.map((currentOrderMap)=>{
+                                          currentOrderMap.itens.map((currentItensMap)=>{
+                                            url+=""+currentItensMap.quantidade+"un." +currentItensMap.name + "%0a" // Mensagem personalizada
+                                            console.log(totalCart)
+                                          })
+                                    })
+                                    url+="%0a" + 
+                                    " *Total da Compra*: " + "%0a"
+                                    + totalCart.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + "%0a" // Mensagem personalizada
+                                  
+                                    window.location.href=url;
+
+
+
+
                                 }, 2000);
                               }
 
