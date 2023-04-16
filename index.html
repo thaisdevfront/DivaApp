@@ -366,9 +366,10 @@
                                     console.log(totalCart)
                                   })
                             })
-                            url+="%0a" + 
-                            " *Total da Compra*: " + "%0a"
-                             + totalCart.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + "%0a" // Mensagem personalizada
+                            url+="*Observações do pedido*: " + observacaoPedido + "%0a" 
+                              + "%0a" 
+                              + " *Total da Compra*: " + "%0a"
+                              + totalCart.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + "%0a" // Mensagem personalizada
                            
                             window.location.href=url;
 
@@ -480,15 +481,17 @@
                                     allordersBuy.map((currentOrderMap)=>{
                                           currentOrderMap.itens.map((currentItensMap)=>{
                                             url+=""+currentItensMap.quantidade+"un." +currentItensMap.name + "%0a" // Mensagem personalizada
-                                            console.log(totalCart)
+                                             
                                           })
                                     })
-                                    url+="%0a" + 
-                                    " *Total da Compra*: " + "%0a"
+                                    
+                                    url+="*Observações do pedido*: " + observacaoPedido + "%0a" 
+                                    + "%0a"  
+                                    + " *Total da Compra*: " + "%0a"
                                     + totalCart.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + "%0a" // Mensagem personalizada
-                                  
-                                    window.location.href=url;
-
+                                  console.log(url)
+                                    // window.location.href=url;
+                                    
 
 
 
